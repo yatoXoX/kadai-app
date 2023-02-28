@@ -13,6 +13,7 @@
 
 <body class="">
     <x-header></x-header>
+    @if ($isOwnPost)
     <div class="page post-detail-page">
         <div class="post">
             <a href="/user/{{ $user->id }}">
@@ -37,6 +38,18 @@
         </div>
     </div>
 </body>
+@else
+<div class="page post-detail-page">
+        <div class="post">
+            <a href="/user/{{ $user->id }}">
+                <div class="user-info">
+                    <img class="user-icon" src="{{ asset('/img/user_icon.png') }}" alt="" />
+                    <div class="user-name">{{ $user->name }}</div>
+                </div>
+                <div class="content">{{ $post->content }}</div>
+                <div class="time-stamp">{{ $post->created_at }}</div>
+            </a>
+ @endif
 <x-footer></x-footer>
 <script src="{{ asset('/js/app.js') }}"></script>
 <script>
