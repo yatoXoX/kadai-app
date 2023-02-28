@@ -44,7 +44,7 @@ class PostController extends Controller
             'postContent' => 'required|max:140',
           ];
          
-          $messages = ['required' => '必須項目です', 'max' => '100文字以下にしてください。'];
+          $messages = ['required' => '1文字以上入力してください。', 'max' => '140文字以下にしてください。'];
          
           Validator::make($request->all(), $rules, $messages)->validate();
 
