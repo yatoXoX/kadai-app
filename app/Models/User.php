@@ -83,4 +83,66 @@ class User extends Model
             ->first()
             ->delete();
     }
+
+    /**
+     * ユーザーがフォローしているユーザーのリストを取得する
+     */
+    public function blockUsers()
+    {
+        $followUsers = Block::where('user', $this->id)->get();
+        $result = [];
+        foreach ($blockUsers as $blockUser) {
+            array_push($result, $blockUser->blockUser());
+        }
+        return $result;
+    }
+
+    /**
+     * ユーザーをフォローしているユーザーのリストを取得する
+     */
+    public function blockerUsers()
+    {
+        $blockerUsers = Block::where('block_user', $this->id)->get();
+        $result = [];
+        foreach ($blockerUsers as $blockUser) {
+            array_push($result, $blockUser->blockerUser());
+        }
+        return $result;
+    }
+
+    /**
+     * $idのユーザーがこのユーザーをフォローしているか判定する
+     */
+    public function isBlocked($id)
+    {
+        foreach ($this->blockUsers() as $blockUser) {
+            if ($blockUser->id == $id) {
+                return true;
+            }
+        }
+
+        return false;
+    }
+
+    /**
+     * $idのユーザーをフォローする
+     */
+    public function block($id)
+    {
+        $block = new Block;
+        $block->user = $this->id;
+        $block->block_user = $id;
+        $block->save();
+    }
+
+    /**
+     * $idのユーザーをフォロー解除する
+     */
+    public function unblock($id)
+    {
+        Block::where('user', $this->id)
+            ->where('block_user', $id)
+            ->first()
+            ->delete();
+    }
 }

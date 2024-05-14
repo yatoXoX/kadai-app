@@ -27,6 +27,13 @@
 
 ```composer update --ignore-platform-req=ext-fileinfo```
 
+C:\php-5.6.24\php.ini
+の962行目付近に以下を追記する
+
+extension=php_pdo_mysql.dll
+
+そのあとApacheを再起動 
+
 <h2>3. データベースの構築</h2>
 
 1. xammpのコントロールパネルからapacheとMySQLを起動
