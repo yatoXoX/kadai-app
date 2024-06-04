@@ -89,7 +89,7 @@ class User extends Model
      */
     public function blockUsers()
     {
-        $followUsers = Block::where('user', $this->id)->get();
+        $blockUsers = Block::where('user', $this->id)->get();
         $result = [];
         foreach ($blockUsers as $blockUser) {
             array_push($result, $blockUser->blockUser());

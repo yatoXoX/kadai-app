@@ -95,6 +95,7 @@
 </body>
 <script src="{{ asset('/js/app.js') }}"></script>
 <script>
+    
     function unfollow() {
         if (confirm("フォローを解除しますか?")) {
             document.follow.submit();
