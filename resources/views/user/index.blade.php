@@ -40,11 +40,11 @@
                         <div class="block-info">
                             <form name="block" action="/block/{{ $user->id }}" method="post">
                                 @csrf @method('PUT') @if ($isBlocked)
-                                <input type="hidden" name="isblock" value="0" />
+                                <input type="hidden" name="isblock" value="0" id="block-button"/>
                                 <button class="button-white" onClick="unblock()">
                                         ブロック済み
                                     </button> @else
-                                <input type="hidden" name="isblock" value="1" />
+                                <input type="hidden" name="isblock" value="1" id="block-button" />
                                 <button class="button-black">
                                         ブロック
                                     </button> @endif
@@ -70,8 +70,8 @@
                     </a>
                 </div>
             </div>
-            <div class="post-list">
-                <div class="title">投稿一覧</div>
+            <div class="post-list" id="post-list">
+                <div class="title" >投稿一覧</div>
                 @foreach ($posts as $post)
                 <a href="/post/detail/{{ $post->id }}">
                     <div class="post">
@@ -89,6 +89,10 @@
                 </a>
                 @endforeach
             </div>
+            <div id="display-button-container">
+                    <p>ブロックしているユーザーのポストは表示されません</p>
+                    <input type="button" name="ispost" id="display-button" value="表示する" onClick="display()" />
+                </div>
         </div>
     </div>
     <x-footer></x-footer>
@@ -109,6 +113,24 @@
         }
     }
 </script>
+<script>
+     //ブロック済みか判定
+    const blockButton = document.getElementById("block-button")
+    
+     if (blockButton) {
+        const isBlocked = blockButton.value == 0
+        if (isBlocked) {
+            document.getElementById("post-list").style.display = "none"
+        }
+        else {
+            document.getElementById("display-button-container").style.display = "none"
+        }
+    }
+    function display() {
+        document.getElementById("post-list").style.display = ""
+        document.getElementById("display-button-container").style.display = "none"
+    }
+</script>    
 <style scoped>
     .user-page .page-container {
         padding: 0 10px;

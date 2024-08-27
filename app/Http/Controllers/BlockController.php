@@ -56,10 +56,14 @@ class BlockController extends Controller
         $loginUser = Session::get('user');
 
         if ($request->isblock) {
-            // フォロー処理
+            // ブロック処理
             $loginUser->block($id);
+        //ブロック時にフォロー解除
+        if($loginUser->isFollowed($id)){
+        $loginUser->unfollow($id);
+        }
         } else {
-            // フォロー解除処理
+            // ブロック解除処理
             $loginUser->unblock($id);
         }
 
