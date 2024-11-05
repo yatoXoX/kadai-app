@@ -23,6 +23,18 @@
         </form>
     </div>
 </body>
+<body class="">
+    <x-header></x-header>
+    <div class="page post-page">
+        <form class="form" action="/reply" method="reply">
+            @csrf
+            <textarea name="postContent" id="" cols="30" rows="5" placeholder="いまどうしてる?"></textarea>
+            <div class="post-button">
+                <button class="button-white" type="submit">投稿する</button>
+            </div>
+        </form>
+    </div>
+</body>
 @error('postContent')
   <div class="mt-3">
       <p class="text-red-500">

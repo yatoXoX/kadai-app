@@ -84,6 +84,8 @@ class PostController extends Controller
             $isOwnPost = $loginUser->id == $user->id;
         }
 
+        $replys = $post->user();
+
         // 画面表示
         return view('post.detail', compact('post', 'user', 'isOwnPost','replys'));
     }
