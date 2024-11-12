@@ -51,6 +51,26 @@
             </a>
  @endif
 <x-footer></x-footer>
+@foreach ($posts as $post)
+    <div class="post">
+        <p>{{ $post->user->name }}: {{ $post->content }}</p>
+        <!-- リプライボタン -->
+        <button onclick="showReplyForm({{ $post->id }})">Reply</button>
+        <!-- リプライ表示 -->
+        <div id="replies-{{ $post->id }}">
+            @foreach ($post->replies as $reply)
+                <div class="reply">
+                    <p>{{ $reply->user->name }}: {{ $reply->content }}</p>
+                </div>
+            @endforeach
+        </div>
+        <!-- リプライフォーム -->
+        <div id="replyForm-{{ $post->id }}" style="display:none;">
+            <textarea id="replyContent-{{ $post->id }}" placeholder="Write your reply"></textarea>
+            <button onclick="submitReply({{ $post->id }})">Submit Reply</button>
+        </div>
+    </div>
+@endforeach
 <script src="{{ asset('/js/app.js') }}"></script>
 <script>
     function deletePost() {

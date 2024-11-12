@@ -19,6 +19,7 @@ class PostSeeder extends Seeder
             'user' => '2',
             'content' => '完璧を目指すよりもとにかくやってしまうことだ',
             'created_at' => new DateTime('2020-11-01 00:00:00'),
+            'reply_to'=> '6'
         ]);
         Post::create([
             'user' => '2',
