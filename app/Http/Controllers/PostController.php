@@ -84,10 +84,11 @@ class PostController extends Controller
             $isOwnPost = $loginUser->id == $user->id;
         }
 
-        $replys = $post->user();
+        $replies= $post->replies();
+        
 
         // 画面表示
-        return view('post.detail', compact('post', 'user', 'isOwnPost','replys'));
+        return view('post.detail', compact('post', 'user', 'isOwnPost','replies'));
     }
 
     /**
@@ -175,4 +176,5 @@ class PostController extends Controller
 
         return redirect('/');
     }
+    
 }
