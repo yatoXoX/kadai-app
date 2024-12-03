@@ -85,10 +85,12 @@ class PostController extends Controller
         }
 
         $replies= $post->replies();
-        
+
+        $parentPost= $post->parentPost();
+
 
         // 画面表示
-        return view('post.detail', compact('post', 'user', 'isOwnPost','replies'));
+        return view('post.detail', compact('post', 'user', 'isOwnPost','replies','parentPost'));
     }
 
     /**

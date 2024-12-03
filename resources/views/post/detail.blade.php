@@ -13,8 +13,22 @@
 
 <body class="">
     <x-header></x-header>
-    @if ($isOwnPost)
+
     <div class="page post-detail-page">
+        @if ($parentPost)
+        <div class="parentPost">
+            <a href="/user/{{ $parentPost->user()->id }}">
+                <div class="user-info">
+                    <img class="user-icon" src="{{ asset('/img/user_icon.png') }}" alt="" />
+                    <div class="user-name">{{ $parentPost->user()->name}}</div>
+                </div>  
+            </a>
+            <a href="/post/detail/{{ $parentPost->id }}">
+               <div class="pearentpost">{{ $parentPost->content }}</div>
+               <div class="time-stamp">{{ $parentPost->created_at }}</div>
+           </a>
+        </div>
+        @endif
         <div class="post">
             <a href="/user/{{ $user->id }}">
                 <div class="user-info">
@@ -24,45 +38,36 @@
                 <div class="content">{{ $post->content }}</div>
                 <div class="time-stamp">{{ $post->created_at }}</div>
             </a>
+            @if ($isOwnPost)
             <div class="menu">
                 <div class="menu-item font-blue">
                     <a href="/post/edit/{{ $post->id }}">編集</a>
                 </div>
                 <form name="delete" action="/post/delete/{{ $post->id }}" method="post">
                     @csrf
-                    <div class="menu-item font-red" onclick="deletePost()">
+                     <div class="menu-item font-red" onclick="deletePost()">
                         削除
                     </div>
                 </form>
             </div>
+            @endif
         </div>
-    </div>
-</body>
-@else
-<div class="page post-detail-page">
-        <div class="post">
-            <a href="/user/{{ $user->id }}">
-                <div class="user-info">
-                    <img class="user-icon" src="{{ asset('/img/user_icon.png') }}" alt="" />
-                    <div class="user-name">{{ $user->name }}</div>
-                </div>
-                <div class="content">{{ $post->content }}</div>
-                <div class="time-stamp">{{ $post->created_at }}</div>
-            </a>
-        </div>
-    @foreach ($replies as $reply)
+        @foreach ($replies as $reply)
         <div class="reply">
             <a href="/user/{{ $reply->user()->id }}">
                 <div class="user-info">
                     <img class="user-icon" src="{{ asset('/img/user_icon.png') }}" alt="" />
                     <div class="user-name">{{ $reply->user()->name}}</div>
                 </div>  
+            </a>
+            <a href="/post/detail/{{ $reply->id }}">
                <div class="reply">{{ $reply->content }}</div>
                <div class="time-stamp">{{ $reply->created_at }}</div>
-            </a>
+           </a>
         </div>    
-    @endforeach
- @endif
+        @endforeach
+    </div>
+ </body>
 <x-footer></x-footer>
 <script src="{{ asset('/js/app.js') }}"></script>
 <script>

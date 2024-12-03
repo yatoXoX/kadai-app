@@ -23,4 +23,8 @@ class Post extends Model
         ->where('is_deleted',false)
         ->get();
     }
+    public function parentPost()
+    {
+        return Post::find($this->parent_id);
+    }
 }
