@@ -48,6 +48,8 @@ class PostController extends Controller
          
           Validator::make($request->all(), $rules, $messages)->validate();
 
+         
+          dd($request->parent_id);
 
         // データ登録
         $post = new Post;

@@ -52,6 +52,17 @@
             </div>
             @endif
         </div>
+        <div class="replysousin">
+        <form class="form" action="/post" method="post">
+            @csrf
+            <textarea name="postContent" id="" cols="30" rows="5" placeholder="リプライ"></textarea>
+            <input type="hidden" name="reply_to" value="0"/>
+            <input type="hidden" name="parent_id" value="1"/>
+            <div class="post-button">
+                <button class="button-white" type="submit">リプライ</button>
+            </div>
+        </form>
+     </div>
         @foreach ($replies as $reply)
         <div class="reply">
             <a href="/user/{{ $reply->user()->id }}">
