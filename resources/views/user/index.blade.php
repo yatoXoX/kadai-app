@@ -39,15 +39,18 @@
                         </div>
                         <div class="block-info">
                             <form name="block" action="/block/{{ $user->id }}" method="post">
-                                @csrf @method('PUT') @if ($isBlocked)
+                                @csrf @method('PUT') 
+                                @if ($isBlocked)
                                 <input type="hidden" name="isblock" value="0" id="block-button"/>
                                 <button class="button-white" onClick="unblock()">
                                         ブロック済み
-                                    </button> @else
+                                    </button> 
+                                @else
                                 <input type="hidden" name="isblock" value="1" id="block-button" />
                                 <button class="button-black">
                                         ブロック
-                                    </button> @endif
+                                </button>
+                                @endif
                             </form>
                         </div>
                         @endif

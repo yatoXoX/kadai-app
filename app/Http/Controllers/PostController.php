@@ -49,12 +49,13 @@ class PostController extends Controller
           Validator::make($request->all(), $rules, $messages)->validate();
 
          
-          dd($request->parent_id);
 
         // データ登録
         $post = new Post;
         $post->user = $loginUser->id;
         $post->content = $request->postContent;
+        $post->reply_to = $request->reply_to;
+        $post->parent_id = $request->parent_id;
         $post->save();
 
         return redirect('/');

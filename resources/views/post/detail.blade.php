@@ -56,8 +56,12 @@
         <form class="form" action="/post" method="post">
             @csrf
             <textarea name="postContent" id="" cols="30" rows="5" placeholder="リプライ"></textarea>
-            <input type="hidden" name="reply_to" value="0"/>
-            <input type="hidden" name="parent_id" value="1"/>
+            <input type="hidden" name="reply_to" value="{{$post->id}}"/>
+             @if ($parentPost)
+             <input type="hidden" name="parent_id" value="{{$post->parent_id}}"/>
+            @else
+            <input type="hidden" name="parent_id" value="{{$post->id}}"/>
+            @endif
             <div class="post-button">
                 <button class="button-white" type="submit">リプライ</button>
             </div>
